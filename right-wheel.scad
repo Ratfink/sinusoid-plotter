@@ -17,22 +17,39 @@
 
 include <constants.scad>;
 
-module right_wheel(radius, height, rim_thickness, rim_height, holes) {
-	half_ir = (radius - rim_thickness)/2;
-	hole_radius = pi*half_ir/(holes*2);
+module right_wheel(radius, height, rim_thickness, rim_height, axle_radius,
+                   axle_length, holes = 6, hole_radius_factor = 4/3) {
+	middle_radius = (radius - rim_thickness + axle_radius + rim_height)/2;
+	hole_radius = hole_radius_factor*pi*middle_radius/(holes*2);
 
-	difference() {
-		cylinder(r = radius, h = height);
+	union() {
+		difference() {
+			// Wheel body
+			cylinder(r = radius, h = height);
 
-		translate([0, 0, height - rim_height])
-		cylinder(r = radius - rim_thickness, h = height);
+			// Cutout on axle side to save plastic
+			translate([0, 0, height - rim_height])
+			cylinder(r = radius - rim_thickness, h = height);
 
-		for(x = [0:holes-1]) {
-			translate([cos(360*x/holes)*half_ir, sin(360*x/holes)*half_ir, -.5])
-			cylinder(r = hole_radius, h = height + 1);
+			// Holes through the wheel to save plastic
+			for(x = [0:holes-1]) {
+				translate([cos(360*x/holes)*middle_radius,
+                           sin(360*x/holes)*middle_radius, -.5])
+				cylinder(r = hole_radius, h = height + 1);
+			}
 		}
+
+		// Axle shaft
+		translate([0, 0, height - rim_height])
+		cylinder(r = axle_radius, h = axle_length + rim_height);
+
+		// Axle flange
+		translate([0, 0, height - rim_height])
+		cylinder(r1 = axle_radius + rim_height, r2 = axle_radius,
+                 h = rim_height);
 	}
 }
 
+// axle_radius = 4 to fit in a 688 bearing
 right_wheel(radius = 33, height = 7, rim_thickness = 6, rim_height = 2.5,
-            holes = 6);
+            axle_radius = 4, axle_length = 65);
