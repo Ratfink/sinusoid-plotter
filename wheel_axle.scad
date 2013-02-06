@@ -50,3 +50,5 @@ module wheel_axle(radius, height, rim_thickness, rim_height, axle_radius,
 
 wheel_axle(radius = 33, height = 7, rim_thickness = 6, rim_height = 2.5,
             axle_radius = 4, axle_length = 55);
+
+// vim: ts=4 sw=4 noet
