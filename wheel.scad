@@ -17,8 +17,9 @@
 
 include <constants.scad>;
 
-module wheel_axle(radius, height, rim_thickness, rim_height, axle_radius,
-                   axle_length, holes=6, hole_radius_factor=4/3) {
+module wheel(radius, height, rim_thickness, rim_height, axle_radius,
+             axle_length, holes=6, hole_radius_factor=4/3)
+{
 	middle_radius = (radius - rim_thickness + axle_radius + rim_height)/2;
 	hole_radius = hole_radius_factor*pi*middle_radius/(holes*2);
 
@@ -40,15 +41,10 @@ module wheel_axle(radius, height, rim_thickness, rim_height, axle_radius,
 
 	// Axle flange
 	translate([0, 0, height - rim_height])
-	cylinder(r1 = axle_radius + rim_height, r2 = axle_radius,
-             h = rim_height);
-
-	// Axle shaft
-	translate([0, 0, height])
-	cylinder(r = axle_radius, h = axle_length);
+	cylinder(r = axle_radius + rim_height, h = rim_height);
 }
 
-wheel_axle(radius = 33, height = 7, rim_thickness = 6, rim_height = 2.5,
+wheel(radius = 33, height = 7, rim_thickness = 6, rim_height = 2.5,
             axle_radius = 4, axle_length = 55);
 
 // vim: ts=4 sw=4 noet
