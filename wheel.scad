@@ -18,11 +18,12 @@
 include <constants.scad>;
 
 module wheel(radius, height, rim_thickness, rim_height, axle_radius,
-             axle_depth, axle_wall, axle_closed=false, axle_pin=1.5, nut_diam,
+             axle_depth, axle_wall, axle_closed=false, axle_pin, nut_radius,
              nut_thickness, holes=6, hole_radius_factor=4/3)
 {
 	// Calculations for the holes in the disk
-	middle_radius = (radius - rim_thickness + axle_radius + axle_wall + rim_height)/2;
+	middle_radius = (radius - rim_thickness + axle_radius + axle_wall +
+                     rim_height)/2;
 	hole_radius = hole_radius_factor*pi*middle_radius/(holes*2);
 
 	difference() {
@@ -47,19 +48,22 @@ module wheel(radius, height, rim_thickness, rim_height, axle_radius,
 			if (axle_closed == false) {
 				cylinder(r = axle_radius + axle_wall, h = axle_depth);
 			} else {
-				cylinder(r = axle_radius + axle_wall, h = axle_depth + axle_wall);
+				cylinder(r = axle_radius + axle_wall,
+                         h = axle_depth + axle_wall);
 			}
 
 			// Axle flange
 			translate([0, 0, height - rim_height])
-			cylinder(r1 = axle_radius + axle_wall + rim_height, r2 = axle_radius + axle_wall, h = rim_height);
+			cylinder(r1 = axle_radius + axle_wall + rim_height,
+                     r2 = axle_radius + axle_wall, h = rim_height);
 
 			// Nut trap body
-			translate([-nut_diam/2 - 1, axle_radius, 0])
+			translate([-nut_radius - 1, axle_radius, 0])
 			if (axle_closed == false) {
-				cube([nut_diam + 2, axle_wall + nut_thickness, axle_depth]);
+				cube([2*nut_radius + 2, axle_wall + nut_thickness, axle_depth]);
 			} else {
-				cube([nut_diam + 2, axle_wall + nut_thickness, axle_depth + axle_wall]);
+				cube([2*nut_radius + 2, axle_wall + nut_thickness,
+                      axle_depth + axle_wall]);
 			}
 		}
 
@@ -76,15 +80,16 @@ module wheel(radius, height, rim_thickness, rim_height, axle_radius,
 		rotate([90, 0, 0])
 		cylinder(r = axle_pin, h = 2*(axle_radius + axle_wall)+1, center=true);
 
-		// Axle nut
-		translate([0, axle_radius + axle_wall, (axle_depth - height)/2 + height])
+		// Axle nut trap
+		translate([0, axle_radius + axle_wall,
+                   (axle_depth - height)/2 + height])
 		rotate([-90, 30, 0])
-		cylinder(r = nut_diam/2, h = nut_thickness + 1, $fn=6);
+		cylinder(r = nut_radius, h = nut_thickness + 1, $fn=6);
 	}
 }
 
 wheel(radius = 33, height = 7, rim_thickness = 6, rim_height = 2.5,
-      axle_radius = 3.96875, axle_depth = 15, axle_wall = 2, nut_diam = 5,
-      nut_thickness = 2);
+      axle_radius = 3.96875, axle_depth = 15, axle_wall = 2, axle_pin = 1.7,
+      nut_radius = 3.13, nut_thickness = 3);
 
 // vim: ts=4 sw=4 noet
