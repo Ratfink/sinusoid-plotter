@@ -77,7 +77,7 @@ module wheel(radius, height, rim_thickness, rim_height, axle_radius,
 
 		// Perpendicular axle hole
 		translate([0, 0, (axle_depth - height)/2 + height])
-		rotate([90, 0, 0])
+		rotate([90, 30, 0])
 		cylinder(r = axle_pin, h = 2*(axle_radius + axle_wall)+1, center=true);
 
 		// Axle nut trap
@@ -91,5 +91,3 @@ module wheel(radius, height, rim_thickness, rim_height, axle_radius,
 wheel(radius = 33, height = 7, rim_thickness = 6, rim_height = 2.5,
       axle_radius = 3.96875, axle_depth = 15, axle_wall = 2, axle_pin = 1.7,
       nut_radius = 3.13, nut_thickness = 3);
-
-// vim: ts=4 sw=4 noet
