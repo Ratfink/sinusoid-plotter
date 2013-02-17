@@ -18,11 +18,12 @@
 include <constants.scad>;
 
 module h_beam(size, bar_thickness, bearing_radius, bearing_rim,
-              bearing_thickness, hole_radius, hole_depth, nut_radius,
-              nut_thickness, nut_depth)
+              bearing_thickness, bearing_circle, hole_radius, hole_depth,
+              nut_radius, nut_thickness, nut_depth)
 {
 	difference() {
 		union() {
+			// Main beams
 			translate([-size[0]/2, -size[1]/2, 0])
 			cube([bar_thickness, size[1], size[2]]);
 
@@ -32,7 +33,8 @@ module h_beam(size, bar_thickness, bearing_radius, bearing_rim,
 			translate([-size[0]/2 + bar_thickness, -bar_thickness/2, 0])
 			cube([size[0] - bar_thickness*2, bar_thickness, size[2]]);
 
-			cylinder(r = bearing_radius*1.7, h = size[2]);
+			// Circle around the bearing hole
+			cylinder(r = bearing_radius + bearing_circle, h = size[2]);
 		}
 
 		// Smaller bearing hole
@@ -67,6 +69,7 @@ module h_beam(size, bar_thickness, bearing_radius, bearing_rim,
 	}
 }
 
-h_beam(size = [80, 76, 7], bar_thickness = 10, bearing_radius = 8,
-       bearing_rim = 1, bearing_thickness = 5, hole_radius = 1.7,
-       hole_depth = 10, nut_radius = 3.13, nut_thickness = 3, nut_depth = 7);
+h_beam(size = [90, 76, 7], bar_thickness = 10, bearing_radius = 8,
+       bearing_rim = 1, bearing_thickness = 5, bearing_circle = 6,
+       hole_radius = 1.7, hole_depth = 10, nut_radius = 3.13,
+       nut_thickness = 3, nut_depth = 7);
