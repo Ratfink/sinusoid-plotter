@@ -18,7 +18,7 @@
 include <constants.scad>;
 
 module wheel(radius, height, rim_thickness, rim_height, axle_radius,
-             axle_depth, axle_wall, axle_closed=false, axle_pin, nut_radius,
+             axle_depth, axle_wall, axle_closed=false, axle_screw, nut_radius,
              nut_thickness, holes=6, hole_radius_factor=4/3)
 {
 	// Calculations for the holes in the disk
@@ -60,7 +60,8 @@ module wheel(radius, height, rim_thickness, rim_height, axle_radius,
 			// Nut trap body
 			translate([-nut_radius - 1, axle_radius, 0])
 			if (axle_closed == false) {
-				cube([2*nut_radius + 2, axle_wall + nut_thickness, axle_depth]);
+				cube([2*nut_radius + 2, axle_wall + nut_thickness,
+                      axle_depth]);
 			} else {
 				cube([2*nut_radius + 2, axle_wall + nut_thickness,
                       axle_depth + axle_wall]);
@@ -78,7 +79,8 @@ module wheel(radius, height, rim_thickness, rim_height, axle_radius,
 		// Perpendicular axle hole
 		translate([0, 0, (axle_depth - height)/2 + height])
 		rotate([90, 30, 0])
-		cylinder(r = axle_pin, h = 2*(axle_radius + axle_wall)+1, center=true);
+		cylinder(r = axle_screw, h = 2*(axle_radius + axle_wall)+1,
+                 center=true);
 
 		// Axle nut trap
 		translate([0, axle_radius + axle_wall,
@@ -89,5 +91,7 @@ module wheel(radius, height, rim_thickness, rim_height, axle_radius,
 }
 
 wheel(radius = 33, height = 7, rim_thickness = 6, rim_height = 2.5,
-      axle_radius = 3.96875, axle_depth = 15, axle_wall = 2, axle_pin = 1.7,
-      nut_radius = 3.13, nut_thickness = 3);
+      axle_radius = 3.96875, axle_depth = 15, axle_wall = 2, axle_screw = 1.7,
+      nut_radius = 0, nut_thickness = -1);
+/* nut_radius = 3.13, nut_thickness = 3 for #4 nuts (probably not needed, just
+ * use wood screws instead */

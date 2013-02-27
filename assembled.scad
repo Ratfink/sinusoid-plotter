@@ -25,7 +25,7 @@ use <top_disk.scad>;
 color([0.5, 1.0, 1.0])
 translate([0, 45, 33])
 rotate([90, 0, 0])
-side(size = [90, 60, 7], bar_thickness = 10, bearing_radius = 8,
+side(size = [90, 70, 7], bar_thickness = 10, bearing_radius = 8,
      bearing_rim = 1, bearing_thickness = 5, spacer_hole_width = 80,
      spacer_hole_radius = 1.7, top_hole = 20);
 
@@ -38,13 +38,13 @@ color([1.0, 1.0, 0.5])
 translate([0, 46, 33])
 rotate([-90, 0, 0])
 wheel(radius = 33, height = 7, rim_thickness = 6, rim_height = 2.5,
-      axle_radius = 3.96875, axle_depth = 15, axle_wall = 2, axle_pin = 1.7,
-      nut_radius = 3.13, nut_thickness = 3);
+      axle_radius = 3.96875, axle_depth = 15, axle_wall = 2, axle_screw = 1.7,
+      nut_radius = 0, nut_thickness = -1);
 
 color([0.5, 1.0, 1.0])
 translate([0, -45, 33])
 rotate([90, 0, 180])
-side(size = [90, 60, 7], bar_thickness = 10, bearing_radius = 8,
+side(size = [90, 70, 7], bar_thickness = 10, bearing_radius = 8,
      bearing_rim = 1, bearing_thickness = 5, spacer_hole_width = 80,
      spacer_hole_radius = 1.7, top_hole = 20);
 
@@ -57,8 +57,8 @@ color([1.0, 1.0, 0.5])
 translate([0, -46, 33])
 rotate([90, 180, 0])
 wheel(radius = 33, height = 7, rim_thickness = 6, rim_height = 2.5,
-      axle_radius = 3.96875, axle_depth = 15, axle_wall = 2, axle_pin = 1.7,
-      nut_radius = 3.13, nut_thickness = 3);
+      axle_radius = 3.96875, axle_depth = 15, axle_wall = 2, axle_screw = 1.7,
+      nut_radius = 0, nut_thickness = -1);
 
 color([0.6, 0.4, 0.0])
 translate([0, 0, 33])
