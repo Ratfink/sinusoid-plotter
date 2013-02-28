@@ -19,7 +19,7 @@ include <constants.scad>;
 
 module side(size, bar_thickness, bearing_radius, bearing_rim,
             bearing_thickness, spacer_hole_width, spacer_hole_radius,
-            top_hole)
+            top_hole, channel_hole)
 {
 	difference() {
 		// Main body
@@ -78,9 +78,25 @@ module side(size, bar_thickness, bearing_radius, bearing_rim,
 				cylinder(r = spacer_hole_radius, h = size[2] + 2);
 			}
 		}
+
+		// Channel holes
+		translate([0, bearing_radius + bar_thickness/2 + channel_hole,
+                   size[2]/2])
+		rotate([30, 0, 0])
+		rotate([0, 90, 0])
+		cylinder(r = spacer_hole_radius, h = size[0] + 2, center=true);
+
+		// Channel nuts
+		translate([0, bearing_radius + bar_thickness/2 + channel_hole,
+                   size[2]/2])
+		rotate([0, 90, 0])
+		cylinder(r = nut_radius,
+                 h = size[0] - 2*bar_thickness + 2*nut_thickness, center=true,
+                 $fn = 6);
 	}
 }
 
-side(size = [90, 60, 7], bar_thickness = 10, bearing_radius = 8,
+side(size = [90, 70, 7], bar_thickness = 10, bearing_radius = 8,
      bearing_rim = 1, bearing_thickness = 5, spacer_hole_width = 80,
-     spacer_hole_radius = 1.7, top_hole = 20);
+     spacer_hole_radius = 1.7, top_hole = 20, channel_hole = 25.5,
+     nut_radius = 3.13, nut_thickness = 3);

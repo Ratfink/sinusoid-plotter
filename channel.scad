@@ -20,27 +20,21 @@ include <constants.scad>;
 module channel(size, channel_depth, channel_width, mount_width, mount_radius)
 {
 	difference() {
-		union() {
-			translate([-size[0]/2, -size[1]/2, 0])
-			cube(size);
+		translate([-size[0]/2, -size[1]/2, 0])
+		cube(size);
 
-			translate([-size[0]/2, -size[1]/2, size[2]])
-			cube([mount_width, size[1], mount_width + mount_radius]);
-
-			translate([size[0]/2 - mount_width, -size[1]/2, size[2]])
-			cube([mount_width, size[1], mount_width + mount_radius]);
-		}
-
-		translate([-size[0]/2 - 1, -channel_width/2, -1])
+		translate([-size[0]/2 - 1, -channel_width/2, size[2] - channel_depth])
 		cube([size[0] + 2, channel_width, channel_depth + 1]);
 
-		translate([(mount_width - size[0])/2, size[1]/2 + mount_radius, -1])
-		cylinder(r = mount_radius, h = size[2] + 2);
+		translate([(mount_width - size[0])/2, 0, (size[2] - channel_depth)/2])
+		rotate([90, 30, 0])
+		cylinder(r = mount_radius, h = size[1] + 2, center=true);
 
-		translate([(size[0] - mount_width)/2, size[1]/2 + mount_radius, -1])
-		cylinder(r = mount_radius, h = size[2] + 2);
+		translate([(size[0] - mount_width)/2, 0, (size[2] - channel_depth)/2])
+		rotate([90, 30, 0])
+		cylinder(r = mount_radius, h = size[1] + 2, center=true);
 	}
 }
 
-channel(size = [90, 10, 8], channel_depth = 5, channel_width = 5,
+channel(size = [90, 10, 12], channel_depth = 5, channel_width = 5,
         mount_width = 7, mount_radius = 1.7);

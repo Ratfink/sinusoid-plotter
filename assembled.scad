@@ -21,13 +21,15 @@ use <wheel.scad>;
 use <side.scad>;
 use <h_beam.scad>;
 use <top_disk.scad>;
+use <channel.scad>;
 
 color([0.5, 1.0, 1.0])
 translate([0, 45, 33])
 rotate([90, 0, 0])
 side(size = [90, 70, 7], bar_thickness = 10, bearing_radius = 8,
      bearing_rim = 1, bearing_thickness = 5, spacer_hole_width = 80,
-     spacer_hole_radius = 1.7, top_hole = 20);
+     spacer_hole_radius = 1.7, top_hole = 20, channel_hole = 25.5,
+     nut_radius = 3.13, nut_thickness = 3);
 
 color([0.7, 0.7, 0.7])
 translate([0, 44, 33])
@@ -46,7 +48,8 @@ translate([0, -45, 33])
 rotate([90, 0, 180])
 side(size = [90, 70, 7], bar_thickness = 10, bearing_radius = 8,
      bearing_rim = 1, bearing_thickness = 5, spacer_hole_width = 80,
-     spacer_hole_radius = 1.7, top_hole = 20);
+     spacer_hole_radius = 1.7, top_hole = 20, channel_hole = 25.5,
+     nut_radius = 3.13, nut_thickness = 3);
 
 color([0.7, 0.7, 0.7])
 translate([0, -44, 33])
@@ -100,3 +103,15 @@ top_disk(radius = 35, height = 7, axle_radius = 3.96875, axle_depth = 5,
 color([0.6, 0.4, 0.0])
 translate([20, 0, 74])
 cylinder(r = 3.96875, h = 14);
+
+color([0.9, 0.8, 1.0])
+translate([50, 0, 68])
+rotate([0, 0, 90])
+channel(size = [90, 10, 12], channel_depth = 5, channel_width = 5,
+        mount_width = 7, mount_radius = 1.7);
+
+color([0.9, 0.8, 1.0])
+translate([-50, 0, 68])
+rotate([0, 0, 90])
+channel(size = [90, 10, 12], channel_depth = 5, channel_width = 5,
+        mount_width = 7, mount_radius = 1.7);
