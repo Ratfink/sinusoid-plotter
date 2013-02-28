@@ -22,6 +22,7 @@ use <side.scad>;
 use <h_beam.scad>;
 use <top_disk.scad>;
 use <channel.scad>;
+use <slider.scad>;
 
 color([0.5, 1.0, 1.0])
 translate([0, 45, 33])
@@ -115,3 +116,9 @@ translate([-50, 0, 68])
 rotate([0, 0, 90])
 channel(size = [90, 10, 12], channel_depth = 5, channel_width = 5,
         mount_width = 7, mount_radius = 1.7);
+
+color([0.6, 0.6, 1.0])
+translate([0, 0, 86])
+rotate([180, 0, 0])
+slider(sin_size = [95, 14, 5], slide_size = [4, 28, 11], slot_radius = 3.96875,
+       slot_length = 70, ext_length = 8, clip_edge = [6, 40]);
