@@ -18,7 +18,7 @@
 include <constants.scad>;
 
 module slider(sin_size, slide_size, slot_radius, slot_length, ext_length,
-              clip_edge)
+              clip_edge, hole_pos, hole_radius, nut_radius)
 {
 	difference() {
 		union() {
@@ -46,8 +46,29 @@ module slider(sin_size, slide_size, slot_radius, slot_length, ext_length,
 			translate([slot_length/2, 0, -1])
 			cylinder(r = slot_radius, h = sin_size[2] + 2);
 		}
+
+		translate([sin_size[0]/2 + slide_size[0] + ext_length - 1, hole_pos,
+                   clip_edge[1]/2])
+		rotate([0, 90, 0])
+		cylinder(r = hole_radius, h = clip_edge[0] + 2);
+
+		translate([sin_size[0]/2 + slide_size[0] + ext_length - 1, hole_pos,
+                   clip_edge[1]/2])
+		rotate([0, 90, 0])
+		cylinder(r = nut_radius, h = nut_thickness + 1, $fn = 6);
+
+		translate([sin_size[0]/2 + slide_size[0] + ext_length - 1, -hole_pos,
+                   clip_edge[1]/2])
+		rotate([0, 90, 0])
+		cylinder(r = hole_radius, h = clip_edge[0] + 2);
+
+		translate([sin_size[0]/2 + slide_size[0] + ext_length - 1, -hole_pos,
+                   clip_edge[1]/2])
+		rotate([0, 90, 0])
+		cylinder(r = nut_radius, h = nut_thickness + 1, $fn = 6);
 	}
 }
 
 slider(sin_size = [95, 14, 5], slide_size = [4, 28, 11], slot_radius = 3.96875,
-       slot_length = 70, ext_length = 8, clip_edge = [6, 40]);
+       slot_length = 70, ext_length = 8, clip_edge = [6, 40], hole_pos = 9,
+       hole_radius = 1.7, nut_radius = 3.13, nut_thickness = 3);

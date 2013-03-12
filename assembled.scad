@@ -23,11 +23,12 @@ use <h_beam.scad>;
 use <top_disk.scad>;
 use <channel.scad>;
 use <slider.scad>;
+use <clamp.scad>;
 
 color([0.5, 1.0, 1.0])
 translate([0, 45, 33])
 rotate([90, 0, 0])
-side(size = [90, 70, 7], bar_thickness = 10, bearing_radius = 8,
+side(size = [90, 90, 7], bar_thickness = 10, bearing_radius = 8,
      bearing_rim = 1, bearing_thickness = 5, spacer_hole_width = 80,
      spacer_hole_radius = 1.7, top_hole = 20, channel_hole = 25.5,
      nut_radius = 3.13, nut_thickness = 3);
@@ -47,7 +48,7 @@ wheel(radius = 33, height = 7, rim_thickness = 6, rim_height = 2.5,
 color([0.5, 1.0, 1.0])
 translate([0, -45, 33])
 rotate([90, 0, 180])
-side(size = [90, 70, 7], bar_thickness = 10, bearing_radius = 8,
+side(size = [90, 90, 7], bar_thickness = 10, bearing_radius = 8,
      bearing_rim = 1, bearing_thickness = 5, spacer_hole_width = 80,
      spacer_hole_radius = 1.7, top_hole = 20, channel_hole = 25.5,
      nut_radius = 3.13, nut_thickness = 3);
@@ -120,5 +121,12 @@ channel(size = [90, 10, 12], channel_depth = 5, channel_width = 5,
 color([0.6, 0.6, 1.0])
 translate([0, 0, 86])
 rotate([180, 0, 0])
-slider(sin_size = [95, 14, 5], slide_size = [4, 28, 11], slot_radius = 3.96875,
-       slot_length = 70, ext_length = 8, clip_edge = [6, 40]);
+slider(sin_size = [97, 14, 5], slide_size = [4, 28, 11], slot_radius = 3.96875,
+       slot_length = 70, ext_length = 8, clip_edge = [6, 40], hole_pos = 9,
+       hole_radius = 1.7, nut_radius = 3.13, nut_thickness = 3);
+
+color([0.5, 0.7, 0.7])
+translate([72, 0, 59])
+rotate([0, 0, 180])
+clamp(size = [8, 28, 14], pen_pos = 1, pen_radius = 4, hole_pos = 9,
+      hole_radius = 1.7, logo_depth = 0.75, logo_radius = 6);

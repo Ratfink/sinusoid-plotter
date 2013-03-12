@@ -63,7 +63,7 @@ module side(size, bar_thickness, bearing_radius, bearing_rim,
 			translate([-size[0]/2 + 1.5*bar_thickness,
                        bearing_radius + 1.5*bar_thickness, 0])
 			cube([size[0] - 3*bar_thickness,
-                  size[1] - 2.5*bar_thickness - 2*bearing_radius, size[2]]);
+                  size[1] - 4*bar_thickness - 2*bearing_radius, size[2]]);
 
 			cylinder(r = 0.5*bar_thickness, h = size[2], center=true);
 		}
